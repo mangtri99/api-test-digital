@@ -1,0 +1,737 @@
+{
+	"info": {
+		"_postman_id": "ec5fd40a-be1b-46ae-9647-2184146cb6fb",
+		"name": "API Test Digital",
+		"description": "# Documentation API Test Digital\n\nThis documentation outlines the usage of the CRUD API for managing resources.\n\n## Introduction\n\nThis is a simple CRUD API allow you to do operation Create, Read, Update, and Delete resources. This API follow RESTful principles and supports the standard HTTP methods for performing these operations.\n\n`BASE_URL =` [<code>http://localhost:8000/api</code>](http://localhost:8000)\n\n## API Endpoints\n\n| Operation | **Method** | Path | **Description** |\n| --- | --- | --- | --- |\n| Create | POST | /user | create a new resource user |\n| Read(Single) | GET | /user/{id} | get a single resource user |\n| Read(All) | GET | /user | get a list of all resource user |\n| Update | PUT | /user/{id} | update an existing resource user by ID |\n| Delete | DELETE | /user/{id} | delete a resource user by ID |\n\n1. Read(All) `/user` \\[GET\\]\n    \n\n| **Params** | **Type** | **Required** | **default** | **Description** |\n| --- | --- | --- | --- | --- |\n| search | string | NO |  | filter list user by search like email and email |\n| sort | string | NO | created_at | sort by column |\n| order | string | NO | desc | set order by ascending |\n| page | number | NO | 1 | current page pagination |\n| per_page | number | NO | 10 | show limit data data return |\n\n2\\. Read (single) `/user/{id}` \\[GET\\]\n\n| **Params** | **Type** | **Required** | **Default** | **Description** |\n| --- | --- | --- | --- | --- |\n| id | string | YES |  | retrive a single data by id |\n\n3\\. Store \\[POST\\] and Update \\[PATCH\\] `/user`\n\n| **Params** | **Type** | **Required** | **Default** | **Description** |\n| --- | --- | --- | --- | --- |\n| name | string | YES |  | minimum length 3 |\n| email | string | YES |  | must valid email, unique |\n| password | string | YES |  |  |\n\n4\\. Delete /user/{id} \\[DELETE\\]\n\n| **Params** | **Type** | **Required** | **Default** | **Description** |\n| --- | --- | --- | --- | --- |\n| id | string | YES |  | delete data by id |\n\n# Request Format\n\nAll requests to the API should use JSON as the request body content type.\n\n#### Request Headers\n\n- Content-Type: application/json\n    \n\n#### Example Request Body\n\n``` json\n{\n  \"field1\": \"some value\",\n  \"field2\": \"some value 2\"\n}\n\n ```\n\n## Response Format\n\nAll responses from the API are in JSON format.\n\nResponse Structure\n\n- message: description of result\n- data: resource data\n- error: description of error message, return when request fail\n    \n\n#### Example Response Success\n\nStatus code: 200\n\n``` json\n{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Norma Davis PhD\",\n        \"email\": \"uhomenick@example.net\",\n        \"email_verified_at\": \"2023-11-25T09:20:38.000000Z\",\n        \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n        \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n    }\n}\n\n ```\n\n#### Example Response Error\n\nStatus code: 4**\n\n``` json\n{\n    \"message\": \"The email field is required. (and 5 more errors)\",\n    \"errors\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ],\n    }\n}\n\n ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8515974"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GET ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_base_url}}/user",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "Gets all of your [collections](https://www.getpostman.com/docs/collections). The response includes all of your subscribed collections."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base_url}}/candidate",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"candidate"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "",
+											"description": "Optional. A workspace ID.",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "name",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "asc",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "10",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Norma Davis PhD\",\n            \"email\": \"uhomenick@example.net\",\n            \"email_verified_at\": \"2023-11-25T09:20:38.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Lempi Wolff\",\n            \"email\": \"ana.zieme@example.org\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Jerod Brekke\",\n            \"email\": \"alisha.langosh@example.org\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Elenor Raynor\",\n            \"email\": \"mcollier@example.com\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Ophelia Lesch Jr.\",\n            \"email\": \"thiel.ova@example.org\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Mr. Dwight Dietrich\",\n            \"email\": \"damore.jason@example.org\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Prof. Rosanna Hammes I\",\n            \"email\": \"von.lennie@example.com\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Mr. Orion Brekke V\",\n            \"email\": \"nsauer@example.net\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Prof. Jo Wilkinson\",\n            \"email\": \"jewell.lind@example.net\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Edgar Considine\",\n            \"email\": \"dubuque.eusebio@example.com\",\n            \"email_verified_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n            \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/user?page=1\",\n        \"last\": \"http://localhost:8000/api/user?page=2\",\n        \"prev\": null,\n        \"next\": \"http://localhost:8000/api/user?page=2\"\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 2,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/user?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": \"http://localhost:8000/api/user?page=2\",\n                \"label\": \"2\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/user?page=2\",\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/user\",\n        \"per_page\": 10,\n        \"to\": 10,\n        \"total\": 11\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DETAIL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_base_url}}/user/1",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Gets information about a collection. For a complete list of this endpoint's possible values, use the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base_url}}/user/1",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Norma Davis PhD\",\n        \"email\": \"uhomenick@example.net\",\n        \"email_verified_at\": \"2023-11-25T09:20:38.000000Z\",\n        \"created_at\": \"2023-11-25T09:20:39.000000Z\",\n        \"updated_at\": \"2023-11-25T09:20:39.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Error Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_base_url}}/user/1000",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"user",
+										"1000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No query results for model [App\\\\Models\\\\User] 1000\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mang Tri\",\n    \"email\": \"mangtri93@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "Creates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n*   `info` — An **object** that contains the following properties:\n    *   `name` — A **string** value that contains the collection's name.\n    *   `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n*   `item` — An **object** that contains the HTTP request and response information.\n    *   `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n*   For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    *   `info` object — Use the `definitions.info` entry.\n    *   `item` object — Use the `definitions.items` entry.\n*   For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json)."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"mangtri93@gmail.com\",\n    \"phone_number\": \"081330092930\",\n    \"full_name\": \"I Nyoman Tri Aditya\",\n    \"dob\": \"1999-03-08\",\n    \"pob\": \"Amlapura, Bali\",\n    \"gender\": \"M\",\n    \"year_exp\": \"3\",\n    \"salary\": \"10000000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_base_url}}/candidate",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"candidate"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"mangtri93@gmail.com\",\n        \"name\": \"Mang Tri\",\n        \"updated_at\": \"2023-11-25T09:58:07.000000Z\",\n        \"created_at\": \"2023-11-25T09:58:07.000000Z\",\n        \"id\": 12\n    }\n}"
+						},
+						{
+							"name": "Error Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"mangtri93@gmail.com\",\n    \"phone_number\": \"081330092930\",\n    \"full_name\": \"I Nyoman Tri Aditya\",\n    \"dob\": \"1999-03-08\",\n    \"pob\": \"Amlapura, Bali\",\n    \"gender\": \"M\",\n    \"year_exp\": \"3\",\n    \"salary\": \"10000000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_base_url}}/candidate",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"candidate"
+									],
+									"query": [
+										{
+											"key": "workspace",
+											"value": "1f0df51a-8658-4ee8-a2a1-d2567dfa09a9",
+											"description": "Optional. A workspace ID in which to create the collection.\n\nIf you do not include this query parameter, the system creates the collection in your \"My Workspace\" workspace.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The email field is required. (and 2 more errors)\",\n    \"errors\": {\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mang Tri\",\n    \"email\": \"mangtri93@gmail.com\",\n    \"password\": \"12345678\"\n}"
+						},
+						"url": {
+							"raw": "{{api_base_url}}/user/1",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						},
+						"description": "Updates a collection using the [Postman Collection v2 schema format](https://schema.postman.com/json/collection/v2.1.0/docs/index.html). Include a `collection` object in the request body that contains the following required properties:\n\n- `info` — An **object** that contains the following properties:\n    - `name` — A **string** value that contains the collection's name.\n    - `schema` — A **string** that contains a URL to the collection's schema. For example, the `https://schema.getpostman.com/collection/v1` URL.\n- `item` — An **object** that contains the HTTP request and response information.\n    - `request` — An **object** that contains the collection's request information. For a complete list of values, refer to the `definitions.request` entry in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json). If you pass an empty object for this value, the system defaults to an untitled GET request.\n\n**Note:**\n\n- For a complete list of available property values for this endpoint, use the following references available in the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json):\n    - `info` object — Use the `definitions.info` entry.\n    - `item` object — Use the `definitions.items` entry.\n- For all other possible values, refer to the [collection.json schema file](https://schema.postman.com/json/collection/v2.1.0/collection.json).\n    \n\n### Important\n\nUse caution when using this endpoint. The system will replace the existing collection with the values passed in the request body."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"mangtri931@gmail.com\",\n    \"phone_number\": \"081230092930\",\n    \"full_name\": \"I Nyoman Tri Aditya\",\n    \"dob\": \"1999-03-08\",\n    \"pob\": \"Amlapura, Bali\",\n    \"gender\": \"M\",\n    \"year_exp\": \"3\",\n    \"last_salary\": \"10000000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_base_url}}/user/2",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"user",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": []\n}"
+						},
+						{
+							"name": "Error Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"mangtri931@gmail.com\",\n    \"phone_number\": \"081230092930\",\n    \"full_name\": \"I Nyoman Tri Aditya\",\n    \"dob\": \"1999-03-08\",\n    \"pob\": \"Amlapura, Bali\",\n    \"gender\": \"M\",\n    \"year_exp\": \"3\",\n    \"last_salary\": \"10000000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_base_url}}/user/2",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"user",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The email has already been taken.\",\n    \"errors\": {\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_base_url}}/user/1",
+							"host": [
+								"{{api_base_url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						},
+						"description": "Deletes a collection."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_base_url}}/user/1",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": []\n}"
+						},
+						{
+							"name": "Error Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_base_url}}/user/100",
+									"host": [
+										"{{api_base_url}}"
+									],
+									"path": [
+										"user",
+										"100"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No query results for model [App\\\\Models\\\\User] 100\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/collections` endpoints let you manage your [collections](https://learning.postman.com/docs/sending-requests/intro-to-collections/)."
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		},
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api"
+		}
+	]
+}
