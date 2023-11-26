@@ -110,6 +110,13 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         try {
+            // if id is current user id, prevent delete
+            if ($id == auth()->user()->id) {
+                return response()->json([
+                    'message' => 'You cannot delete your own account',
+                ], 403);
+            }
+
             $user = User::findOrFail($id);
             $user->delete();
             return new SuccessResource([]);
