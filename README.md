@@ -8,7 +8,11 @@ This is a simple project API CRUD operation
  - Database MySQL
 
 ### How to get started?
-After clone this project, simply run
+After clone this project,
+
+Create database with name `api_digital_cellar`
+
+and then simply run
 
 ```bash
     composer install
