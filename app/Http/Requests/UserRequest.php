@@ -22,15 +22,17 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         $emailRule = 'required|email|unique:users,email';
+        $passwordRule = 'required|min:8';
 
-        // when update data, ignore unique email for current user
+        // when update data, ignore unique email and required password for current user
         if (request()->isMethod('PUT')) {
             $emailRule = 'required|email|unique:users,email,' . $this->user->id;
+            $passwordRule = 'nullable|min:8';
         }
         return [
             'email' => $emailRule,
             'name' => 'required',
-            'password' => 'required|min:8',
+            'password' => $passwordRule,
         ];
     }
 }

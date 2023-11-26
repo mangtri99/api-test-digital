@@ -21,6 +21,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $perPage = $request->per_page ? (int) $request->per_page : 10;
         $candidates = User::when($request->search, function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->search . '%')
                 ->orWhere('email', 'like', '%' . $request->search . '%');
@@ -29,7 +30,7 @@ class UserController extends Controller
                 $query->orderBy($request->sort, $request->order ?? 'asc'); // default order is asc
             }, function ($query) {
                 $query->orderBy('created_at', 'desc');
-            })->paginate((int) $request->per_page ?? 10);
+            })->paginate($perPage);
         return UserResource::collection($candidates);
     }
 
@@ -90,6 +91,10 @@ class UserController extends Controller
     {
         try {
             $data = $request->validated();
+            // if password is empty, remove it from data
+            if (empty($data['password'])) {
+                unset($data['password']);
+            }
             $user->update($data);
             return new SuccessResource([]);
         } catch (Exception $e) {
